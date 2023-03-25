@@ -26,7 +26,7 @@ requirements:
 
 test:
   imports:
-    - deutschland.eco_visio
+    - deutschland.EcoVisio
   commands:
     - pip check
   requires:
