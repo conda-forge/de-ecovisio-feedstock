@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: de-ecovisio
+  version: "0.1.0"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/de-EcoVisio-${{ version }}.tar.gz
+  sha256: b7e6946f6dbc2efea3dade0357a2589153d84395219bbef8b12d912fc663dcf3
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - poetry
+  run:
+    - python >=${{ python_min }}
+    - python-dateutil
+    - urllib3 >=1.25.3
+
+tests:
+  - python:
+      imports:
+        - deutschland.EcoVisio
+      pip_check: true
+      python_version: ${{ python_min }}
+
+about:
+  summary: "Eco-Counter: Eco-Visio-API"
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+  homepage: https://github.com/bundesAPI/eco-visio-api
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
